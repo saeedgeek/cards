@@ -65,3 +65,8 @@ func (d deck) shuffle() deck {
 	return newDeck
 
 }
+
+func (d deck) deal(handCount int) (deck, deck) {
+	return d[:handCount], d[handCount:]
+
+}
