@@ -2,7 +2,10 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"math/rand"
+	"os"
+	"strings"
 )
 
 type deck []string
@@ -69,4 +72,20 @@ func (d deck) shuffle() deck {
 func (d deck) deal(handCount int) (deck, deck) {
 	return d[:handCount], d[handCount:]
 
+}
+
+func (d deck) saveToFile(fileName string) {
+	ioutil.WriteFile(fileName, d.toByteSlice(), os.ModeAppend)
+
+}
+
+func (d deck) toByteSlice() []byte {
+	myString := strings.Join(d, " ") + " "
+	return []byte(myString)
+
+	// var allDeck string
+	// for _, deckItem := range d {
+	// 	allDeck += deckItem + " "
+	// }
+	// return []byte(allDeck)
 }
